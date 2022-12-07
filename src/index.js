@@ -3,27 +3,28 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import Home from './component/Home';
-import Navigaton from './component/Navigaton'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./component/Home";
+import Navigaton from "./component/Navigaton";
 import LiveCam from "./component/LiveCam";
+
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-      <Route path="/" element={<App />} >
-          <Route path="/navigation" element={<Navigaton />} />
-          <Route path="/livecam" element={<LiveCam />} />
-          <Route index element={<Home />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="/navigation" element={<Navigaton />} />
+            <Route path="/livecam" element={<LiveCam />} />
+            <Route index element={<Home />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

@@ -5,7 +5,7 @@ import './Home.css'
 const Home = () => {
   return (
     <div className="home_img">
-      <img src={img2}></img>
+      <img className='home_img-a1' src={img2}></img>
     </div>
   )
 }

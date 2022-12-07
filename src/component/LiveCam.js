@@ -13,11 +13,11 @@ const LiveCam = () => {
       <h1 className="wrapper__title">Livestream Camera</h1>
       <img src={img1} className="wrapper__img"></img>
       <div>
-        {location.state.map((data) => (
+        {/* {location.state.map((data) => (
           <div key={data.id}>
             <h1>{data.description}</h1>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

@@ -1,4 +1,10 @@
 .home_img {
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
     text-align: center;
+    background-color: darkgray;
+    border-radius: 10%;
+}
+
+.home_img-a1 {
+    border-radius: 10px;
 }
