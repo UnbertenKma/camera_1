@@ -1,15 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./component/Home";
-import Navigaton from "./component/Navigaton";
 import LiveCam from "./component/LiveCam";
+import Navigaton from "./component/Navigaton";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import MapView from "./component/MapView";
 
-import store from "./redux/store";
 import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,6 +21,7 @@ root.render(
           <Route path="/" element={<App />}>
             <Route path="/navigation" element={<Navigaton />} />
             <Route path="/livecam" element={<LiveCam />} />
+            <Route path="/mapview" element={<MapView />} />
             <Route index element={<Home />} />
           </Route>
         </Routes>

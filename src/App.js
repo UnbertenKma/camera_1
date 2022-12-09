@@ -1,17 +1,15 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Header from './component/Header';
-import './App.css'
-import RtspCam from './component/RtspCam';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import "./App.css";
+import Header from "./component/Header";
 
 const App = () => {
   return (
-    <div className='App'>
-      <div className='app-header'>
+    <div className="App">
+      <div className="app-header">
         <Header />
-        {/* <RtspCam /> */}
       </div>
-      <div className='app-content'>
+      <div className="app-content">
         <Outlet />
         {/* app content */}
       </div>
@@ -19,5 +17,3 @@ const App = () => {
   );
 };
 export default App;
-
-

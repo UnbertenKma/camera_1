@@ -1,14 +1,12 @@
 // =============== Antd ============================
+import { DownOutlined, YoutubeOutlined } from "@ant-design/icons";
+import { Tree } from "antd";
 import React, { useEffect, useState } from "react";
-
-import { AppstoreOutlined } from "@ant-design/icons";
-import { Menu } from "antd";
-
-import { useNavigate } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import { setMenus } from "../redux/actions/menuActions";
+import CustomRightClick from "./clickRight/CustomRightClick";
+
 
 const data = [
   {
@@ -21,65 +19,20 @@ const data = [
   },
 ];
 
-const items = [
-  {
-    label: "Tang 1",
-    key: "sub1",
-    icon: <AppstoreOutlined />,
-    children: [
-      {
-        label: "Vi tri 1",
-        key: "1",
-      },
-      {
-        label: "Vi tri 2",
-        key: "2",
-      },
-      {
-        label: "Phong 1",
-        key: "sub2",
-        icon: null,
-        children: [
-          {
-            label: "Vi tri 1",
-            key: "1-1",
-          },
-          {
-            label: "Vi tri 2",
-            key: "1-2",
-          },
-        ],
-      },
-    ],
-  },
-];
-
-// {
-//   label: "Phong 2",
-//   key: "sub3",
-//   icon: null,
-//   children: [
-//     {
-//       label: "Vi tri 1",
-//       key: "2-1"
-//     },
-//     {
-//       label: "Vi tri 2",
-//       key: "2-2"
-//     }
-//   ]
-// }
-
 const Navigaton = (props) => {
-  const menus = useSelector((state) => state.allMenus.menus);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [postList, setPostList] = useState([]);
 
+  const menus = useSelector((state) => state.allMenus.menus);
+
+  const handleClick = () => {
+    console.log("OK");
+  };
+
   async function fetchPostList() {
     try {
-      const requestUrl = "http://192.168.14.91:8099/locations";
+      const requestUrl = "http://192.168.14.91:8099/locationsParent";
       const response = await fetch(requestUrl);
       const responseJSON = await response.json();
       const data = responseJSON;
@@ -107,89 +60,105 @@ const Navigaton = (props) => {
     }
   };
 
-  // const items = menus.map((menu) => {
+  const onSelect = (selectedKeys, info) => {
+    console.log("selected", selectedKeys, info);
+  };
+
+  const onClickView = () => {
+    navigate("/livecam")
+  }
+
+  const treeData = [
+    {
+      title: "Tòa nhà CT1",
+      key: "0-0",
+      children: [
+        {
+          title: (
+            <div style={{ display: "flex" }}>
+              <span style={{ marginRight: "8px" }}>Tầng 1</span>
+              <CustomRightClick />
+            </div>
+          ),
+          key: "0-0-0",
+          children: [
+            {
+              title: (
+                <div style={{ display: "flex" }}>
+                  <span style={{ marginRight: "8px" }}
+                    onClick={onClickView}
+                  >Vị trí 1</span>
+                  <YoutubeOutlined style={{ marginTop: "5px" }} />
+                </div>
+              ),
+              key: "0-0-0-0",
+            },
+          ],
+        },
+        // {
+        //   title: "parent 1-1",
+        //   key: "0-0-1",
+        //   children: [
+        //     {
+        //       title: "leaf",
+        //       key: "0-0-1-0",
+        //     },
+        //   ],
+        // },
+        // {
+        //   title: "parent 1-2",
+        //   key: "0-0-2",
+        //   children: [
+        //     {
+        //       title: "leaf",
+        //       key: "0-0-2-0",
+        //     },
+        //     {
+        //       title: "leaf",
+        //       key: "0-0-2-1",
+        //     },
+        //   ],
+        // },
+      ],
+    },
+  ];
+
+  // const treeData = [];
+
+  // menus.map((menu) => {
   //   const { id, name } = menu;
-  //   return (
-  //     <div key={id}>{name}</div>
-  //   )
 
+  //   // menu.map((data) => {
+  //   //   console.log(data.name)
+  //   // })
 
-
-
-    // [
-    //   {
-    //     label: {name},
-    //     key: {id},
-    //     icon: <AppstoreOutlined />,
-    //     children: [
-    //       {
-    //         label: {name},
-    //         key: {id},
-    //       },
-    //       {
-    //         label: {name},
-    //         key: {id},
-    //       },
-    //       {
-    //         label: {name},
-    //         key: {id},
-    //         icon: null,
-    //         children: [
-    //           {
-    //             label: {name},
-    //             key: {id},
-    //           },
-    //           {
-    //             label: {name},
-    //             key: {id},
-    //           },
-    //         ],
-    //       },
-    //     ],
-    //   },
-    // ];
-  //});
-
-  // {
-  //   label: "Tang 1",
-  //   key: "sub1",
-  //   icon: <AppstoreOutlined />,
-  //   children: [
-  //     {
-  //       label: "Vi tri 1",
-  //       key: "1",
-  //     },
-  //     {
-  //       label: "Vi tri 2",
-  //       key: "2",
-  //     },
-  //     {
-  //       label: "Phong 1",
-  //       key: "sub2",
-  //       icon: null,
-  //       children: [
-  //         {
-  //           label: "Vi tri 1",
-  //           key: "1-1",
-  //         },
-  //         {
-  //           label: "Vi tri 2",
-  //           key: "1-2",
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
+  //   treeData.push({
+  //     key: id,
+  //     title: name,
+  //     children: [
+  //       {
+  //         title: (
+  //           <div style={{ display: "flex" }}>
+  //             <span style={{ marginRight: "8px" }}>Vị trí 1</span>
+  //             <CustomRightClick />
+  //           </div>
+  //         ),
+  //         // key: id,
+  //         // title: name,
+  //       },
+  //     ],
+  //   });
+  // });
 
   return (
-    <Menu
-      onClick={onClick}
-      style={{
-        width: 200,
-      }}
-      mode="inline"
-      items={items}
-    />
+    <Tree
+      // onClick={onClick}
+      showLine
+      switcherIcon={<DownOutlined />}
+      // onSelect={onSelect}
+      treeData={treeData}
+      defaultExpandedKeys={["0-0-0"]}
+    ></Tree>
   );
 };
 

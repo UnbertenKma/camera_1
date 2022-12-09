@@ -4,7 +4,6 @@ import JSMpeg from "@cycjimmy/jsmpeg-player";
 const ffmpegIP = "localhost";
 
 const RtspCam = () => {
-
   useEffect(() => {
     var videoUrl = `ws://${ffmpegIP}:6789/`;
     var player = new JSMpeg.VideoElement("#video-canvas", videoUrl, {
@@ -24,13 +23,16 @@ const RtspCam = () => {
           fontSize: "28px",
           fontWeight: "bold",
           marginTop: "10px",
-          marginBottom: "10px",
-          color: "blue",
+          marginBottom: "60px",
+          color: "#000",
         }}
       >
         Player stream RTSP
       </div>
-      <div id="video-canvas" style={{ height: "480px", width: "640px" }}></div>
+      <div
+        id="video-canvas"
+        style={{ height: "620px", width: "840px", display: "inline-block" ,textAlign: "center" , border: "20px #ccc solid"}}
+      ></div>
     </div>
   );
 };
