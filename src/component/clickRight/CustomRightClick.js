@@ -7,8 +7,9 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import AddView from "../modalView/AddView";
+import DeleteView from "../modalView/DeleteView";
 
-const CustomRightClick = () => {
+const CustomRightClick = ({name,callBack}) => {
   const menu = (
     <Menu
       items={[
@@ -16,22 +17,27 @@ const CustomRightClick = () => {
           label: (
             <div>
               Add
-              <AddView />
+              <AddView name={name} callBack={(values) => callBack(values)}/>
             </div>
           ),
           key: "1",
           // icon: <VideoCameraAddOutlined />,
         },
         {
-          label: "Edit",
+          label: (
+            <div>
+              Delete
+              <DeleteView />
+            </div>
+          ),
           key: "2",
-          // icon: <EditOutlined />,
-        },
-        {
-          label: "Delete",
-          key: "3",
           // icon: <DeleteOutlined />,
         },
+        // {
+        //   label: "Edit",
+        //   key: "3",
+        //   // icon: <EditOutlined />,
+        // },
       ]}
     ></Menu>
   );
@@ -39,6 +45,7 @@ const CustomRightClick = () => {
     <div className="clickRight">
       <Dropdown overlay={menu}>
         <PlusOutlined />
+        {/* <span>Click</span> */}
       </Dropdown>
     </div>
   );
