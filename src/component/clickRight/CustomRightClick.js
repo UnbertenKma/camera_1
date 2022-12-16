@@ -9,7 +9,7 @@ import {
 import AddView from "../modalView/AddView";
 import DeleteView from "../modalView/DeleteView";
 
-const CustomRightClick = ({name,callBack}) => {
+const CustomRightClick = ({name,nameRoom,nameIndex,callBack}) => {
   const menu = (
     <Menu
       items={[
@@ -17,22 +17,22 @@ const CustomRightClick = ({name,callBack}) => {
           label: (
             <div>
               Add
-              <AddView name={name} callBack={(values) => callBack(values)}/>
+              <AddView name={name} nameRoom={nameRoom} nameIndex={nameIndex} callBack={(values) => callBack(values)}/>
             </div>
           ),
           key: "1",
           // icon: <VideoCameraAddOutlined />,
         },
-        {
-          label: (
-            <div>
-              Delete
-              <DeleteView />
-            </div>
-          ),
-          key: "2",
-          // icon: <DeleteOutlined />,
-        },
+        // {
+        //   label: (
+        //     <div>
+        //       Delete
+        //       <DeleteView />
+        //     </div>
+        //   ),
+        //   key: "2",
+        //   // icon: <DeleteOutlined />,
+        // },
         // {
         //   label: "Edit",
         //   key: "3",

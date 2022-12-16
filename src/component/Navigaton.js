@@ -30,15 +30,6 @@ const Navigaton = (props) => {
     console.log("OK");
   };
 
-  // const buttonClick = async () => {
-  //   const response = await axios.post("http://192.168.14.91:8099/locations",
-  //   {
-  //     name:"Phong hop m",
-  //     parent:"Tang 2"
-  //   });
-  //   console.log(response);
-  // }
-
   async function fetchPostList() {
     try {
       const requestUrl = "http://192.168.14.91:8099/locationsParent";
@@ -95,7 +86,10 @@ const Navigaton = (props) => {
           title: (
             <div key={index.id} style={{ display: "flex" }}>
               <span style={{ marginRight: "8px" }}>{index.name}</span>
-              <CustomRightClick />
+              <CustomRightClick 
+              nameIndex = {index.name}
+              />
+              
             </div>
           ),
         });
@@ -106,7 +100,8 @@ const Navigaton = (props) => {
         title: (
           <div key={room.id} style={{ display: "flex" }}>
             <span style={{ marginRight: "8px" }}>{room.name}</span>
-            <CustomRightClick />
+            <CustomRightClick 
+            nameRoom = {room.name}/>
           </div>
         ),
         children: treeRoom,

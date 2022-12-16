@@ -6,7 +6,7 @@ import axios, { Axios } from "axios";
 import { setMenus } from "../../redux/actions/menuActions";
 import { useDispatch } from "react-redux";
 
-const AddView = ({name,callBack}) => {
+const AddView = ({ name, nameRoom, nameIndex, callBack }) => {
   const urlAddNodeApi = "http://192.168.14.91:8099/locationsParent";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
@@ -40,30 +40,34 @@ const AddView = ({name,callBack}) => {
   function handle(e) {
     const newdata = { ...data };
     newdata[e.target.id] = e.target.value;
-    
+
     setData(newdata);
   }
 
   const onClickName = async (e) => {
-
     const headers = {
-      "Content-Type": "text/json"
-  };
+      "Content-Type": "text/json",
+    };
 
-    console.log({
-      name: data.name,
-      parent:name
-    })
+    // console.log({
+    //   name: data.name,
+    //   parent: name ? name : nameRoom,
+    //   //nameIndex
+    // });
 
-    const response = await axios.post("http://192.168.14.91:8099/locations",{
+    // const body = (name, parent) => {
+    //   name: data.name
+    // };
+
+    const response = await axios.post("http://192.168.14.91:8099/locations", {
       name: data.name,
-      parent:name
+      parent: name ? name : nameRoom,
     });
     console.log(response);
+
     const res = await axios.get("http://192.168.14.91:8099/locationsParent");
     console.log(res);
     dispatch(setMenus(res.data));
-
   };
 
   return (
